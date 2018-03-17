@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremydesvaux
- * Date: 26/07/2017
- * Time: 17:01
- */
 
-namespace WonderWp\Framework\Form;
+namespace WonderWp\Component\Form;
 
-use WonderWp\Framework\Form\Field\FieldGroup;
-use WonderWp\Framework\Form\Field\InputField;
+use WonderWp\Component\Form\Field\FieldGroup;
+use WonderWp\Component\Form\Field\InputField;
 
 class FormTest extends \PHPUnit_Framework_TestCase
 {

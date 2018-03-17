@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremydesvaux
- * Date: 27/07/2017
- * Time: 09:52
- */
 
-namespace WonderWp\Framework\Form;
+namespace WonderWp\Component\Form;
 
 class FormGroupTest extends \PHPUnit_Framework_TestCase
 {
