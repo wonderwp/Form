@@ -24,9 +24,9 @@
         "wonderwp/dependency-injection": "dev-develop@dev"
     },
     "autoload": {
-        "psr-4": {"WonderWp\\Component\\Form\\": ""},
+        "psr-4": {"WonderWp\\Component\\Form\\": "src"},
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "minimum-stability": "dev"
