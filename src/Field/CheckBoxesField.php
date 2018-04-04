@@ -2,7 +2,7 @@
 
 namespace WonderWp\Component\Form\Field;
 
-use function WonderWp\Framework\array_merge_recursive_distinct;
+use function WonderWp\Functions\array_merge_recursive_distinct;
 
 class CheckBoxesField extends FieldGroup
 {

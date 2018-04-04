@@ -2,10 +2,10 @@
 
 namespace WonderWp\Component\Form;
 
-use function WonderWp\Framework\array_merge_recursive_distinct;
 use WonderWp\Component\Form\Field\FieldGroupInterface;
 use WonderWp\Component\Form\Field\HiddenField;
 use WonderWp\Component\Form\Field\OptionsFieldInterface;
+use function WonderWp\Functions\array_merge_recursive_distinct;
 
 class FormViewReadOnly extends FormView
 {
