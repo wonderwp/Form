@@ -2,10 +2,10 @@
 
 namespace WonderWp\Component\Form;
 
-use function WonderWp\Framework\array_merge_recursive_distinct;
 use WonderWp\Component\DependencyInjection\Container;
 use WonderWp\Component\Form\Field\FieldGroup;
 use WonderWp\Component\Form\Field\FieldInterface;
+use function WonderWp\Functions\array_merge_recursive_distinct;
 
 class Form implements FormInterface
 {

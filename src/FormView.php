@@ -12,8 +12,8 @@ use WonderWp\Component\DependencyInjection\Container;
 use WonderWp\Component\Form\Field\FieldGroupInterface;
 use WonderWp\Component\Form\Field\FieldInterface;
 use WonderWp\Component\Form\Field\SelectField;
-use function WonderWp\Framework\array_merge_recursive_distinct;
-use function WonderWp\Framework\paramsToHtml;
+use function WonderWp\Functions\array_merge_recursive_distinct;
+use function WonderWp\Functions\paramsToHtml;
 
 class FormView implements FormViewInterface
 {
