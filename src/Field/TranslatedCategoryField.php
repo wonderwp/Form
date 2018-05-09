@@ -2,8 +2,6 @@
 
 namespace WonderWp\Component\Form\Field;
 
-use WonderWp\Component\Form\Field\AbstractCategoryField;
-
 class TranslatedCategoryField extends AbstractCategoryField
 {
 

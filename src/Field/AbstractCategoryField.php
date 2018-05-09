@@ -2,9 +2,6 @@
 
 namespace WonderWp\Component\Form\Field;
 
-use WonderWp\Component\Form\Field\SelectField;
-use WonderWp\Component\Form\Field\OptionsFieldInterface;
-
 abstract class AbstractCategoryField extends SelectField
 {
 

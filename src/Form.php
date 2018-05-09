@@ -2,7 +2,6 @@
 
 namespace WonderWp\Component\Form;
 
-use WonderWp\Component\DependencyInjection\Container;
 use WonderWp\Component\Form\Field\FieldGroup;
 use WonderWp\Component\Form\Field\FieldInterface;
 use function WonderWp\Functions\array_merge_recursive_distinct;
