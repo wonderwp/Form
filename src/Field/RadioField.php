@@ -2,9 +2,10 @@
 
 namespace WonderWp\Component\Form\Field;
 
-use function WonderWp\Framework\array_merge_recursive_distinct;
+use WonderWp\Component\Form\FormValidator;
 use WonderWp\Component\DependencyInjection\Container;
 use WonderWp\Component\Form\Validation\Validator;
+use function WonderWp\Functions\array_merge_recursive_distinct;
 
 class RadioField extends FieldGroup
 {
@@ -53,6 +54,7 @@ class RadioField extends FieldGroup
 
                 $validationRules = [];
                 if ($i === 0) {
+                    /** @var FormValidator $formValidator */
                     $formValidator = $container->offsetGet('wwp.forms.formValidator');
                     if ($formValidator::hasRule($this->getValidationRules(), 'NotEmpty')) {
                         $validationRules[] = Validator::notEmpty();

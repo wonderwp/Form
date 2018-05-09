@@ -2,7 +2,9 @@
 
 namespace WonderWp\Component\Form;
 
-class FormGroupTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class FormGroupTest extends TestCase
 {
     /**
      * @var FormGroup

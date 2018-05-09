@@ -2,10 +2,10 @@
 
 namespace WonderWp\Component\Form;
 
-use WonderWp\Component\Form\Field\FieldGroup;
+use PHPUnit\Framework\TestCase;
 use WonderWp\Component\Form\Field\InputField;
 
-class FormTest extends \PHPUnit_Framework_TestCase
+class FormTest extends TestCase
 {
     /**
      * @var Form

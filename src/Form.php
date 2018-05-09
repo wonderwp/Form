@@ -40,9 +40,8 @@ class Form implements FormInterface
     /** @inheritdoc */
     public function getView()
     {
-        $container = Container::getInstance();
         /** @var FormView $formView */
-        $formView = $container['wwp.forms.formView'];
+        $formView = new FormView();
         $formView->setFormInstance($this);
 
         return $formView;
