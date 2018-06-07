@@ -108,6 +108,20 @@ class Form implements FormInterface
     }
 
     /** @inheritdoc */
+    public function removeFields(array $fieldNames)
+    {
+        if (!empty($fieldNames)) {
+            foreach ($fieldNames as $fieldName) {
+                if (isset($this->fields[$fieldName])) {
+                    unset($this->fields[$fieldName]);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /** @inheritdoc */
     public function getField($name)
     {
         return !empty($this->fields[$name]) ? $this->fields[$name] : null;
