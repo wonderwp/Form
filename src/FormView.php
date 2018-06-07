@@ -652,6 +652,6 @@ class FormView implements FormViewInterface
      */
     protected function getFormValidator()
     {
-        return $this->container->offsetGet('wwp.forms.formValidator');
+        return $this->container->offsetGet('wwp.form.validator');
     }
 }

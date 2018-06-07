@@ -55,7 +55,7 @@ class RadioField extends FieldGroup
                 $validationRules = [];
                 if ($i === 0) {
                     /** @var FormValidator $formValidator */
-                    $formValidator = $container->offsetGet('wwp.forms.formValidator');
+                    $formValidator = $container->offsetGet('wwp.form.validator');
                     if ($formValidator::hasRule($this->getValidationRules(), 'NotEmpty')) {
                         $validationRules[] = Validator::notEmpty();
                     }
