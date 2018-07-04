@@ -4,7 +4,7 @@ namespace WonderWp\Component\Form\Field;
 
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
-class CheckBoxesField extends FieldGroup
+class CheckBoxesField extends FieldGroup implements OptionsFieldInterface
 {
     /** @inheritdoc */
     public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [])

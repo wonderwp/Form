@@ -2,7 +2,7 @@
 
 namespace WonderWp\Component\Form\Field;
 
-class FieldGroup extends AbstractField implements FieldGroupInterface, OptionsFieldInterface
+class FieldGroup extends AbstractField implements FieldGroupInterface
 {
     use OptionsFieldTrait;
 
