@@ -112,6 +112,25 @@ class FormView implements FormViewInterface
         return $markup;
     }
 
+    /** {@inheritdoc} */
+    public function formBeforeFields($optsBeforeFields = [])
+    {
+        // Init
+        $markup = '';
+
+        // Options given
+        if (count($optsBeforeFields) > 0) {
+            $markup .= '<div class="form-before-fields">';
+            foreach ($optsBeforeFields as $str) {
+                $markup .= $str;
+            }
+            $markup .= '</div>';
+        }
+
+        // Result
+        return $markup;
+    }
+
     /** @inheritdoc */
     public function renderGroup(FormGroup $group)
     {
