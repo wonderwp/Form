@@ -47,10 +47,13 @@ class FormView implements FormViewInterface
     {
         $markup    = '';
         $optsStart = array_key_exists('formStart', $opts) ? $opts['formStart'] : [];
+        $optsBeforeFields = array_key_exists('formBeforeFields', $opts) ? $opts['formBeforeFields'] : [];
         $optsEnd   = array_key_exists('formEnd', $opts) ? $opts['formEnd'] : [];
 
         $markup .= $this->formStart($optsStart);
         $markup .= $this->formErrors();
+        $markup .= $this->formBeforeFields($optsBeforeFields);
+
 
         $fields        = $this->getFormInstance()->getFields();
         $allowedFields = array_key_exists('allowFields', $opts) ? $opts['allowFields'] : array_keys($fields);
