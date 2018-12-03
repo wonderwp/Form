@@ -18,7 +18,7 @@ abstract class AbstractField implements FieldInterface
     protected $errors = [];
     /** @var array */
     protected $displayRules = [];
-    /** @var array */
+    /** @var \Respect\Validation\Validator[] */
     protected $validationRules = [];
     /** @var bool */
     protected $rendered = false;
