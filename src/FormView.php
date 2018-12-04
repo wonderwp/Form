@@ -45,15 +45,14 @@ class FormView implements FormViewInterface
     /** @inheritdoc */
     public function render(array $opts = [])
     {
-        $markup    = '';
-        $optsStart = array_key_exists('formStart', $opts) ? $opts['formStart'] : [];
+        $markup           = '';
+        $optsStart        = array_key_exists('formStart', $opts) ? $opts['formStart'] : [];
         $optsBeforeFields = array_key_exists('formBeforeFields', $opts) ? $opts['formBeforeFields'] : [];
-        $optsEnd   = array_key_exists('formEnd', $opts) ? $opts['formEnd'] : [];
+        $optsEnd          = array_key_exists('formEnd', $opts) ? $opts['formEnd'] : [];
 
         $markup .= $this->formStart($optsStart);
         $markup .= $this->formErrors();
         $markup .= $this->formBeforeFields($optsBeforeFields);
-
 
         $fields        = $this->getFormInstance()->getFields();
         $allowedFields = array_key_exists('allowFields', $opts) ? $opts['allowFields'] : array_keys($fields);
@@ -172,10 +171,12 @@ class FormView implements FormViewInterface
 
         $field->setRendered(true);
 
-        $type   = $field->getType();
-        $markup = $this->fieldWrapStart($field);
+        $type          = $field->getType();
+        $markup        = $this->fieldWrapStart($field);
+        $displayRules  = $field->getDisplayRules();
+        $labelInverted = (isset($displayRules['labelInverted']) && $displayRules['labelInverted']);
 
-        if (!in_array($type, ['radio', 'checkbox'], true)) {
+        if (!$labelInverted) {
             $markup .= $this->fieldLabel($field);
         }
 
@@ -183,7 +184,7 @@ class FormView implements FormViewInterface
         $markup .= $this->fieldBetween($field);
         $markup .= $this->fieldEnd($field);
 
-        if (in_array($type, ['radio', 'checkbox'], true)) {
+        if ($labelInverted) {
             $markup .= $this->fieldLabel($field);
         }
 
@@ -269,7 +270,10 @@ class FormView implements FormViewInterface
         $validationRules      = $field->getValidationRules();
         $attributes           = array_key_exists('labelAttributes', $displayRules) ? $displayRules['labelAttributes'] : [];
         $validationAttributes = $this->getValidationLabelAttributes($validationRules);
-        $attributes           = array_merge_recursive_distinct($validationAttributes, $attributes);
+        if (array_key_exists('inputAttributes', $displayRules) && array_key_exists('id', $displayRules['inputAttributes'])) {
+            $attributes['for'] = $displayRules['inputAttributes']['id'];
+        }
+        $attributes = array_merge_recursive_distinct($validationAttributes, $attributes);
 
         $htmlAttributes = paramsToHtml($attributes);
         $markup         = "<label {$htmlAttributes}>";
@@ -384,11 +388,12 @@ class FormView implements FormViewInterface
                 $val = json_encode($val);
             }
 
-            $markup .= " value=\"{$val}\" ";
-
             if ($type === 'checkbox') {
+                //The value markup has been handled via input attributes in this case
                 $cbValue = $displayRules['inputAttributes']['value'];
                 $markup  .= \checked($field->getValue(), $cbValue, false);
+            } else {
+                $markup .= " value=\"{$val}\" ";
             }
         }
 
@@ -571,12 +576,12 @@ class FormView implements FormViewInterface
         $markup = '';
 
         $defaultOptions = [
-            'showFormTag'   => true,
-            'showSubmit'    => true,
-            'submitLabel'   => __('submit'),
-            'showReset'     => false,
-            'resetLabel'    => __('reset'),
-            'btnAttributes' => [
+            'showFormTag'        => true,
+            'showSubmit'         => true,
+            'submitLabel'        => __('submit'),
+            'showReset'          => false,
+            'resetLabel'         => __('reset'),
+            'btnAttributes'      => [
                 'type'  => 'submit',
                 'class' => 'btn button',
             ],
@@ -589,10 +594,10 @@ class FormView implements FormViewInterface
         $options = array_merge_recursive_distinct($defaultOptions, $optsEnd);
 
         if ($options['showSubmit']) {
-            $markup        .= '<div class="submitFormField">
+            $markup .= '<div class="submitFormField">
                 <button ' . paramsToHtml($options['btnAttributes']) . '>' . $options['submitLabel'] . '</button>';
             if ($options['showReset']) {
-                $markup.='  <button '.paramsToHtml($options['resetbtnAttributes']).'>'.$options['resetLabel'].'</button>';
+                $markup .= '  <button ' . paramsToHtml($options['resetbtnAttributes']) . '>' . $options['resetLabel'] . '</button>';
             }
             $markup .= '</div>';
         }
