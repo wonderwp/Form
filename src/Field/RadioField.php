@@ -19,7 +19,6 @@ class RadioField extends FieldGroup implements OptionsFieldInterface
         }
 
         $this->displayRules['wrapAttributes']['class'][] = 'radio-group';
-        $this->displayRules['labelInverted']             = true;
     }
 
     /**
