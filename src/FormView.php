@@ -319,7 +319,7 @@ class FormView implements FormViewInterface
 
         $markup = '';
         if ($tag === 'select') {
-            $markup .= '<div class="select-style">';
+            $markup .= '<div class="select-style '.(isset($attributes['multiple']) ? ' multiple' : '').'">';
         }
 
         //Open tag
