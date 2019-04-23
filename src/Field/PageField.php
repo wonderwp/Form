@@ -43,7 +43,8 @@ class PageField extends SelectField
 
         foreach ($pages as $page) {
             /** @var $page \WP_Post */
-            $options[$page->ID] = $page->post_title;
+            $ancestors          = get_post_ancestors($page);
+            $options[$page->ID] = str_repeat('- ', count($ancestors)) . $page->post_title;
         }
 
         $this->setOptions($options);
