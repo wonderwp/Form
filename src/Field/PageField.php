@@ -41,10 +41,12 @@ class PageField extends SelectField
 
         $pages = get_pages($r);
 
-        foreach ($pages as $page) {
-            /** @var $page \WP_Post */
-            $ancestors          = get_post_ancestors($page);
-            $options[$page->ID] = str_repeat('- ', count($ancestors)) . $page->post_title;
+        if(!empty($pages)) {
+            foreach ($pages as $page) {
+                /** @var $page \WP_Post */
+                $ancestors          = get_post_ancestors($page);
+                $options[$page->ID] = str_repeat('- ', count($ancestors)) . $page->post_title;
+            }
         }
 
         $this->setOptions($options);
