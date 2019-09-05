@@ -4,6 +4,8 @@ namespace WonderWp\Component\Form\Field;
 
 class CategoryRadioField extends RadioField
 {
+    use TranslatableFieldTrait;
+
     /** @inheritdoc */
     public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0)
     {
@@ -29,19 +31,16 @@ class CategoryRadioField extends RadioField
 
         foreach ($cats as $cat) {
             /** @var $cat \WP_Term */
-            $options[$cat->term_id] = __('term_' . $cat->slug, $this->getTextDomain());
+            $tradKey = 'term_' . $cat->slug;
+            $trad = __('term_' . $cat->slug, $this->getTextDomain());
+            if($trad===$tradKey){
+                $trad = stripslashes($cat->name);
+            }
+            $options[$cat->term_id] = $trad;
         }
 
         $this->setOptions($options);
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTextDomain()
-    {
-        return defined('WWP_THEME_TEXTDOMAIN') ? WWP_THEME_TEXTDOMAIN : 'default';
     }
 }
