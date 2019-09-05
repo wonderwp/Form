@@ -2,29 +2,22 @@
 
 namespace WonderWp\Component\Form\Field;
 
-class CategoryRadioField extends RadioField
+class CategoriesCheckBoxesField extends CheckBoxesField
 {
     use TranslatableFieldTrait;
 
-    /** @inheritdoc */
     public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0)
     {
         parent::__construct($name, $value, $displayRules, $validationRules);
-
-        $this->setCatOptions($parent)->generateRadios();
+        $this->populateOptions($parent)->generateCheckBoxes();
     }
 
-    /**
-     * @param integer $parent
-     *
-     * @return static
-     */
-    public function setCatOptions($parent)
+    public function populateOptions($parentCat)
     {
         $options = [];
 
         $args = [
-            'child_of'   => $parent,
+            'child_of'   => $parentCat,
             'hide_empty' => false,
         ];
         $cats = get_categories($args);
@@ -43,4 +36,5 @@ class CategoryRadioField extends RadioField
 
         return $this;
     }
+
 }
