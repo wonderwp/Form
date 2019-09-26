@@ -379,7 +379,7 @@ class FormView implements FormViewInterface
         }
 
         if ($val instanceof \DateTime) {
-            $val = $val->format('Y-m-d H:i:s');
+            $val = ($type==='date') ? $val->format('Y-m-d') : $val->format('Y-m-d H:i:s');
         }
 
         //Value
