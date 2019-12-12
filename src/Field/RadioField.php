@@ -37,6 +37,7 @@ class RadioField extends FieldGroup implements OptionsFieldInterface
                 $optFieldName           = $name . '__' . $val . '';
                 $defaultOptDisplayRules = [
                     'label'           => $label,
+                    'labelInverted'   => true,
                     'inputAttributes' => [
                         'name'  => $name,
                         'id'    => $name . '__' . $val,

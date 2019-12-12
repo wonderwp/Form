@@ -20,5 +20,7 @@ class CheckBoxField extends InputField
         }
 
         $this->displayRules['wrapAttributes']['class'][] = 'checkbox-wrap';
+
+        $this->displayRules['labelInverted'] = true;
     }
 }
