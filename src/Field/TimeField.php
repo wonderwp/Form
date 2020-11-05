@@ -1,6 +1,6 @@
 <?php
 
-namespace WonderWp\Plugin\Event\Child\Field;
+namespace WonderWp\Component\Form\Field;
 
 use WonderWp\Component\Form\Field\InputField;
 
