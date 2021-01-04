@@ -6,9 +6,14 @@ class CategoriesCheckBoxesField extends CheckBoxesField
 {
     use TranslatableFieldTrait;
 
-    public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0)
+    public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0, $textDomain = '')
     {
         parent::__construct($name, $value, $displayRules, $validationRules);
+        
+        if (!empty($textDomain)) {
+            $this->textDomain = $textDomain;
+        }
+
         $this->populateOptions($parent)->generateCheckBoxes();
     }
 

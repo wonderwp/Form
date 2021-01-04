@@ -7,9 +7,13 @@ class CategoryRadioField extends RadioField
     use TranslatableFieldTrait;
 
     /** @inheritdoc */
-    public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0)
+    public function __construct($name, $value = null, array $displayRules = [], array $validationRules = [], $parent = 0, $textDomain = '')
     {
         parent::__construct($name, $value, $displayRules, $validationRules);
+
+        if (!empty($textDomain)) {
+            $this->textDomain = $textDomain;
+        }
 
         $this->setCatOptions($parent)->generateRadios();
     }
@@ -32,8 +36,8 @@ class CategoryRadioField extends RadioField
         foreach ($cats as $cat) {
             /** @var $cat \WP_Term */
             $tradKey = 'term_' . $cat->slug;
-            $trad = __('term_' . $cat->slug, $this->getTextDomain());
-            if($trad===$tradKey){
+            $trad    = __('term_' . $cat->slug, $this->getTextDomain());
+            if ($trad === $tradKey) {
                 $trad = stripslashes($cat->name);
             }
             $options[$cat->term_id] = $trad;
