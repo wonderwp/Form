@@ -11,7 +11,7 @@ class CategoryField extends AbstractCategoryField
      */
     public function doSetOptions()
     {
-        $hierarchical = $this->buildTree($this->categories, $this->parentCategory);
+        $this->buildTree($this->categories, $this->parentCategory);
         $this->setOptions($this->selectOptions);
 
         return $this;
