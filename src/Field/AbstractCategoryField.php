@@ -46,7 +46,7 @@ abstract class AbstractCategoryField extends SelectField
      * Returns the child categories (see the parent one in the constructor)
      * @return array
      */
-    private function getCategories()
+    protected function getCategories()
     {
         return get_categories([
             'child_of'   => $this->parentCategory,
