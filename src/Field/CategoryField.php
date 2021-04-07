@@ -11,22 +11,28 @@ class CategoryField extends AbstractCategoryField
      */
     public function doSetOptions()
     {
-        $genealogy = [];
-        foreach ($this->categories as $category) {
-            /** @var \WP_Term $category */
-            if (!isset($genealogy[$category->parent])) {
-                $genealogy[$category->parent] = get_ancestors($category->term_id, 'category', 'taxonomy');
-            }
-        }
-        foreach ($this->categories as $category) {
-            /** @var \WP_Term $category */
-            $ancestors                               = isset($genealogy[$category->parent]) ? $genealogy[$category->parent] : [];
-            $this->selectOptions[$category->term_id] = str_repeat(static::$spacer, count($ancestors)) . $category->name;
-        }
-
+        $hierarchical = $this->buildTree($this->categories, $this->parentCategory);
         $this->setOptions($this->selectOptions);
 
         return $this;
+    }
+
+    protected function buildTree(array $elements, $parentId = 0, $level = 0)
+    {
+        $branch = [];
+        foreach ($elements as $element) {
+            if ($element->parent === $parentId) {
+                $this->selectOptions[$element->term_id] = str_repeat(static::$spacer, $level) . $element->name;
+                $children                               = $this->buildTree($elements, $element->term_id, $level + 1);
+                $element->level                         = $level;
+                if ($children) {
+                    $element->children = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+
+        return $branch;
     }
 
 }
