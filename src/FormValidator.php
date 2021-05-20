@@ -37,12 +37,13 @@ class FormValidator implements FormValidatorInterface
                         if (!empty($validationRule[1])) {
                             $errorMsg = $validationRule[1];
                         } else {
-                            $errorMsg = $exception
+                            $exception = apply_filters('wwp.formvalidator.exception.triggered', $exception, $this->formInstance, $field, $fieldData);
+                            $errorMsg  = $exception
                                 ->setTemplate(__($exception->getTemplate(), $translationDomain))
                                 ->getMainMessage()
                             ;
                         }
-                        $fieldErrors[] = $errorMsg;
+                        $fieldErrors[$exception->getId()] = $errorMsg;
                     }
                 }
             }
