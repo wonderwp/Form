@@ -115,4 +115,9 @@ interface FieldInterface
      * @return static
      */
     public function setRendered($rendered);
+
+    /**
+     * @return array
+     */
+    public function toArray();
 }

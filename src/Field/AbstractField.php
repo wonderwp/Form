@@ -4,7 +4,7 @@ namespace WonderWp\Component\Form\Field;
 
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
-abstract class AbstractField implements FieldInterface
+abstract class AbstractField implements FieldInterface, \JsonSerializable
 {
     /** @var string */
     protected $name;
@@ -177,6 +177,28 @@ abstract class AbstractField implements FieldInterface
         $this->validationRules = array_merge($this->validationRules, $passedRules);
 
         return $this;
+    }
+
+    /** @inheritdoc */
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode($this);
+    }
+
+    /** @inheritdoc */
+    public function toArray()
+    {
+        return json_decode(json_encode($this), true);
     }
 }
 

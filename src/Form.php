@@ -6,7 +6,7 @@ use WonderWp\Component\Form\Field\FieldGroup;
 use WonderWp\Component\Form\Field\FieldInterface;
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
-class Form implements FormInterface
+class Form implements FormInterface, \JsonSerializable
 {
     /** @var string */
     protected $name;
@@ -281,5 +281,26 @@ class Form implements FormInterface
 
 
         return $values;
+    }
+
+    /** @inheritdoc */
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode($this);
+    }
+
+    public function toArray()
+    {
+        return json_decode(json_encode($this), true);
     }
 }

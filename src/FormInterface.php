@@ -115,4 +115,9 @@ interface FormInterface
      * @return array
      */
     public function getValues();
+
+    /**
+     * @return array
+     */
+    public function toArray();
 }
