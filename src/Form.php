@@ -2,11 +2,12 @@
 
 namespace WonderWp\Component\Form;
 
+use JsonSerializable;
 use WonderWp\Component\Form\Field\FieldGroup;
 use WonderWp\Component\Form\Field\FieldInterface;
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
-class Form implements FormInterface, \JsonSerializable
+class Form implements FormInterface, JsonSerializable
 {
     /** @var string */
     protected $name;
