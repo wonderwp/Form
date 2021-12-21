@@ -19,14 +19,22 @@ class FormView implements FormViewInterface
 {
     /** @var FormInterface */
     protected $formInstance;
-    /** @var Container */
-    protected $container;
+
+    /** @var FormValidatorInterface */
+    protected $validator;
+
+    /**
+     * @param FormValidatorInterface|null $validator
+     * @param FormInterface|null $formInstance
+     */
+    public function __construct(FormValidatorInterface $validator = null, FormInterface $formInstance = null)
+    {
+        $this->validator    = $validator;
+        $this->formInstance = $formInstance;
+    }
 
     /** Constructor */
-    public function __construct()
-    {
-        $this->container = Container::getInstance();
-    }
+
 
     /** @inheritdoc */
     public function setFormInstance(FormInterface $form)
@@ -319,7 +327,7 @@ class FormView implements FormViewInterface
 
         $markup = '';
         if ($tag === 'select') {
-            $markup .= '<div class="select-style '.(isset($attributes['multiple']) ? ' multiple' : '').'">';
+            $markup .= '<div class="select-style ' . (isset($attributes['multiple']) ? ' multiple' : '') . '">';
         }
 
         //Open tag
@@ -379,7 +387,7 @@ class FormView implements FormViewInterface
         }
 
         if ($val instanceof \DateTime) {
-            $val = ($type==='date') ? $val->format('Y-m-d') : $val->format('Y-m-d H:i:s');
+            $val = ($type === 'date') ? $val->format('Y-m-d') : $val->format('Y-m-d H:i:s');
         }
 
         //Value
@@ -427,9 +435,9 @@ class FormView implements FormViewInterface
 
     /**
      * @param SelectField $field
-     * @param string      $label
-     * @param mixed       $value
-     * @param bool        $isMultiple
+     * @param string $label
+     * @param mixed $value
+     * @param bool $isMultiple
      *
      * @return string
      */
@@ -657,7 +665,7 @@ class FormView implements FormViewInterface
     }
 
     /**
-     * @param string         $label
+     * @param string $label
      * @param FieldInterface $field
      *
      * @return string
@@ -679,6 +687,6 @@ class FormView implements FormViewInterface
      */
     protected function getFormValidator()
     {
-        return $this->container->offsetGet('wwp.form.validator');
+        return $this->validator;
     }
 }

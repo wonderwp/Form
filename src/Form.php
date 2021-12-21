@@ -3,6 +3,7 @@
 namespace WonderWp\Component\Form;
 
 use JsonSerializable;
+use WonderWp\Component\DependencyInjection\Container;
 use WonderWp\Component\Form\Field\FieldGroup;
 use WonderWp\Component\Form\Field\FieldInterface;
 use function WonderWp\Functions\array_merge_recursive_distinct;
@@ -19,7 +20,7 @@ class Form implements FormInterface, JsonSerializable
     protected $groups = [];
 
     /**
-     * @param string           $name
+     * @param string $name
      * @param FieldInterface[] $fields
      */
     public function __construct($name = '', array $fields = [])
@@ -40,8 +41,9 @@ class Form implements FormInterface, JsonSerializable
     /** @inheritdoc */
     public function getView()
     {
-        /** @var FormView $formView */
-        $formView = new FormView();
+        $container = Container::getInstance();
+        /** @var FormViewInterface $formView */
+        $formView = $container['wwp.form.view'];
         $formView->setFormInstance($this);
 
         return $formView;
@@ -171,7 +173,7 @@ class Form implements FormInterface, JsonSerializable
     {
 
         $formData = $this->getValues();
-        $data = array_merge_recursive_distinct($formData,$data);
+        $data     = array_merge_recursive_distinct($formData, $data);
 
         $fields = $this->getFields();
         if (!empty($fields)) {
@@ -207,7 +209,7 @@ class Form implements FormInterface, JsonSerializable
 
     /**
      * @param FieldInterface $f
-     * @param mixed          $data
+     * @param mixed $data
      *
      * @return static
      */
@@ -226,7 +228,7 @@ class Form implements FormInterface, JsonSerializable
                         continue;
                     } else {
                         $data = is_string($data[$ndx]) && strpos($data[$ndx], '\\\\') !== false ? str_replace('\\\\', '\\', $data[$ndx]) : $data[$ndx];
-                        if(is_string($data)){
+                        if (is_string($data)) {
                             $data = stripslashes($data);
                         }
                     }
@@ -248,7 +250,8 @@ class Form implements FormInterface, JsonSerializable
     }
 
     /** @inheritdoc */
-    public function getValues(){
+    public function getValues()
+    {
         $values = [];
 
         $fields = $this->getFields();
