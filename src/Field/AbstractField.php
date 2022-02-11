@@ -3,6 +3,7 @@
 namespace WonderWp\Component\Form\Field;
 
 use JsonSerializable;
+use Respect\Validation\Validator;
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
 abstract class AbstractField implements FieldInterface, JsonSerializable
@@ -19,7 +20,7 @@ abstract class AbstractField implements FieldInterface, JsonSerializable
     protected $errors = [];
     /** @var array */
     protected $displayRules = [];
-    /** @var \Respect\Validation\Validator[] */
+    /** @var Validator[] */
     protected $validationRules = [];
     /** @var bool */
     protected $rendered = false;
@@ -185,7 +186,34 @@ abstract class AbstractField implements FieldInterface, JsonSerializable
     {
         $vars = get_object_vars($this);
 
+        //Validation rules are a set of Validator rules, which are not serializable.
+        //That means if we try, we only see empty arrays in $vars['validationRules'].
+        //We try to compute something a bit more useful.
+        $vars['validationRules'] = $this->serializeValidationRules($this->validationRules);
+
         return $vars;
+    }
+
+    /**
+     * @param Validator[] $givenValidationRules
+     * @return array
+     */
+    protected function serializeValidationRules(array $givenValidationRules)
+    {
+        $validationRules = [];
+        if (!empty($givenValidationRules)) {
+            foreach ($givenValidationRules as $validationRule) {
+                $innerRules = $validationRule->getRules();
+                if (!empty($innerRules)) {
+                    foreach ($innerRules as $i => $innerRule) {
+                        //The rule class is the only accessible reference we can access.
+                        $validationRules[$i] = ['class' => get_class($innerRule)];
+                    }
+                }
+            }
+        }
+
+        return $validationRules;
     }
 
     /**
