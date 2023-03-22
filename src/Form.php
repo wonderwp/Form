@@ -216,33 +216,35 @@ class Form implements FormInterface, JsonSerializable
     protected function fillField(FieldInterface $f, $data)
     {
         $displayRules = $f->getDisplayRules();
-
         if (is_array($displayRules) && is_array($displayRules['inputAttributes']) && !empty($displayRules['inputAttributes']['name'])) {
-            $name     = str_replace(']', '', $displayRules['inputAttributes']['name']);
-            $dataPath = explode('[', $name);
-            if (!empty($dataPath)) {
-                foreach ($dataPath as $ndx) {
-                    if (empty($data[$ndx])) {
-                        $isMultiple = !empty($displayRules['inputAttributes']['multiple']);
-                        $data       = $isMultiple ? [] : null;
-                        continue;
-                    } else {
-                        $data = is_string($data[$ndx]) && strpos($data[$ndx], '\\\\') !== false ? str_replace('\\\\', '\\', $data[$ndx]) : $data[$ndx];
-                        if (is_string($data)) {
-                            $data = stripslashes($data);
-                        }
-                    }
-                }
-            }
 
+            // Case of field group
             if ($f instanceof FieldGroup && is_array($data)) {
                 foreach ($f->getGroup() as $subField) {
                     if (isset($data[$subField->getName()])) {
-                        $subField->setValue($data[$subField->getName()]);
+                        $this->fillField($subField, $data);
                     }
                 }
             } else {
-                $f->setValue($data);
+                $name     = str_replace(']', '', $displayRules['inputAttributes']['name']);
+                $dataPath = explode('[', $name);
+
+                if (!empty($dataPath)) {
+                    foreach ($dataPath as $ndx) {
+                        if (empty($data[$ndx])) {
+                            $isMultiple = !empty($displayRules['inputAttributes']['multiple']);
+                            $data       = $isMultiple ? [] : null;
+                            continue;
+                        } else {
+                            $data = is_string($data[$ndx]) && strpos($data[$ndx], '\\\\') !== false ? str_replace('\\\\', '\\', $data[$ndx]) : $data[$ndx];
+                            if (is_string($data)) {
+                                $data = stripslashes($data);
+                            }
+                        }
+                        $f->setValue($data);
+                    }
+                }
+
             }
         }
 
