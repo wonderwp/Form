@@ -31,7 +31,7 @@ class FormGroup
         if (empty($this->displayRules['class'])) {
             $this->displayRules['class'] = [];
         }
-        if (is_admin()) {
+        if (function_exists('is_admin') && is_admin()) {
             $this->displayRules['class'][] = 'postbox';
             $this->displayRules['class'][] = 'form-group-' . $this->name;
         }

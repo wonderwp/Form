@@ -12,7 +12,7 @@ class FormTest extends TestCase
      */
     private $form;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->form = new Form();
     }
