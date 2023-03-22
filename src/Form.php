@@ -241,10 +241,10 @@ class Form implements FormInterface, JsonSerializable
                                 $data = stripslashes($data);
                             }
                         }
-                        $f->setValue($data);
                     }
                 }
 
+                $f->setValue($data);
             }
         }
 
