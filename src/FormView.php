@@ -635,6 +635,9 @@ class FormView implements FormViewInterface
         if ($lengthRule instanceof Length && $lengthRule->maxValue !== null) {
             $attributes['maxlength'] = $lengthRule->maxValue;
         }
+        if ($lengthRule instanceof Length && $lengthRule->minValue !== null) {
+            $attributes['minlength'] = $lengthRule->minValue;
+        }
 
         $maxRule = $validator::getRule($validationRules, Max::class);
         if ($maxRule instanceof Max) {
@@ -648,7 +651,7 @@ class FormView implements FormViewInterface
 
         $regexRule = $validator::getRule($validationRules, Regex::class);
         if ($regexRule instanceof Regex) {
-            $attributes['pattern'] = $regexRule->regex;
+            $attributes['pattern'] = htmlentities(trim($regexRule->regex,'/'));
         }
 
         return $attributes;
