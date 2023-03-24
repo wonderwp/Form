@@ -648,7 +648,7 @@ class FormView implements FormViewInterface
 
         $regexRule = $validator::getRule($validationRules, Regex::class);
         if ($regexRule instanceof Regex) {
-            $attributes['pattern'] = $regexRule->regex;
+            $attributes['pattern'] = htmlentities(trim($regexRule->regex,'/'));
         }
 
         return $attributes;
