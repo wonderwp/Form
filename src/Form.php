@@ -290,7 +290,7 @@ class Form implements FormInterface, JsonSerializable
     }
 
     /** @inheritdoc */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $vars = get_object_vars($this);
 
