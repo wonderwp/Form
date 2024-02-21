@@ -679,7 +679,7 @@ class FormView implements FormViewInterface
         $validationRules = $field->getValidationRules();
 
         if ($field->getType() !== 'radio' && $validator::hasRule($validationRules, NotEmpty::class)) {
-            $label .= '<span class="required">*</span>';
+            $label .= wp_required_field_indicator();
         }
 
         return $label;
