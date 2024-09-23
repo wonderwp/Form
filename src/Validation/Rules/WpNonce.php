@@ -18,8 +18,8 @@ class WpNonce extends AbstractRule
     }
 
     /** @inheritdoc */
-    public function validate($value)
+    public function validate($input): bool
     {
-        return wp_verify_nonce($value, $this->name);
+        return wp_verify_nonce($input, $this->name);
     }
 }

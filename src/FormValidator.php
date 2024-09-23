@@ -64,10 +64,10 @@ class FormValidator implements FormValidatorInterface
                             if (!empty($validationRule[1])) {
                                 $errorMsg = $validationRule[1];
                             } else {
+                                /** @var ValidationException $exception */
                                 $exception = apply_filters('wwp.formvalidator.exception.triggered', $exception, $this->formInstance, $field, $fieldData);
-                                $errorMsg  = $exception
-                                    ->setTemplate(__($exception->getTemplate(), $translationDomain))
-                                    ->getMainMessage();
+                                $exception->updateTemplate(__($exception->getMessage(), $translationDomain));
+                                    $errorMsg  = $exception->getMessage();
                             }
                             $fieldErrors[$exception->getId()] = $errorMsg;
                         }
@@ -93,10 +93,6 @@ class FormValidator implements FormValidatorInterface
     public static function getRule(array $validationRules, $ruleName)
     {
         foreach ($validationRules as $rule) {
-            if ($rule instanceof AbstractWrapper) {
-                $rule = $rule->getValidatable();
-            }
-
             $reflection = new \ReflectionClass($rule);
 
             if ($ruleName === $reflection->getShortName() || $ruleName === $reflection->getName()) {

@@ -631,14 +631,6 @@ class FormView implements FormViewInterface
             $attributes['required'] = 'required';
         }
 
-        $lengthRule = $validator::getRule($validationRules, Length::class);
-        if ($lengthRule instanceof Length && $lengthRule->maxValue !== null) {
-            $attributes['maxlength'] = $lengthRule->maxValue;
-        }
-        if ($lengthRule instanceof Length && $lengthRule->minValue !== null) {
-            $attributes['minlength'] = $lengthRule->minValue;
-        }
-
         $maxRule = $validator::getRule($validationRules, Max::class);
         if ($maxRule instanceof Max) {
             $attributes['max'] = $maxRule->interval;
