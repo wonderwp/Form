@@ -2,7 +2,7 @@
 
 namespace WonderWp\Component\Form\Field;
 
-use WonderWp\Component\Form\Validation\Validator;
+use Respect\Validation\Validator;
 
 class NonceField extends HiddenField
 {
