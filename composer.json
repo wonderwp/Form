@@ -18,10 +18,10 @@
   "require": {
     "php": ">=8.0",
     "respect/validation": "^2.2",
-    "wonderwp/dependency-injection": "^1.0"
+    "wonderwp/dependency-injection": "dev-feature/php_8"
   },
   "require-dev": {
-    "johnpbloch/wordpress": "^4.7"
+    "johnpbloch/wordpress": "^6.0"
   },
   "autoload": {
     "psr-4": {"WonderWp\\Component\\Form\\": "src"},
