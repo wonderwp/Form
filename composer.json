@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=8.0",
     "respect/validation": "^2.2",
     "wonderwp/dependency-injection": "^1.0"
   },
