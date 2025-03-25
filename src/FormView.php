@@ -668,9 +668,19 @@ class FormView implements FormViewInterface
     protected function getValidationLabelContent($label, FieldInterface $field)
     {
         $validator       = $this->getFormValidator();
-        $validationRules = $field->getValidationRules();
+        if(empty($validator)){
+            return $label;
+        }
 
-        if ($field->getType() !== 'radio' && $validator::hasRule($validationRules, NotEmpty::class)) {
+        $validationRules = $field->getValidationRules();
+        if(empty($validationRules)){
+            return $label;
+        }
+
+        $isRadio = $field->getType() === 'radio';
+        $hasNotEmptyRule = $validator::hasRule($validationRules, NotEmpty::class);
+
+        if (!$isRadio && $hasNotEmptyRule) {
             $label .= wp_required_field_indicator();
         }
 
