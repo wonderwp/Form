@@ -2,9 +2,10 @@
 
 namespace WonderWp\Component\Form\Field;
 
+use Respect\Validation\Validator;
 use WonderWp\Component\Form\FormValidator;
 use WonderWp\Component\DependencyInjection\Container;
-use WonderWp\Component\Form\Validation\Validator;
+
 use function WonderWp\Functions\array_merge_recursive_distinct;
 
 class RadioField extends FieldGroup implements OptionsFieldInterface

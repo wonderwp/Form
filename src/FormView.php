@@ -630,17 +630,7 @@ class FormView implements FormViewInterface
         if ($validator::hasRule($validationRules, NotEmpty::class)) {
             $attributes['required'] = 'required';
         }
-
-        $maxRule = $validator::getRule($validationRules, Max::class);
-        if ($maxRule instanceof Max) {
-            $attributes['max'] = $maxRule->interval;
-        }
-
-        $minRule = $validator::getRule($validationRules, Min::class);
-        if ($minRule instanceof Min) {
-            $attributes['min'] = $minRule->interval;
-        }
-
+        
         $regexRule = $validator::getRule($validationRules, Regex::class);
         if ($regexRule instanceof Regex) {
             $attributes['pattern'] = htmlentities(trim($regexRule->regex,'/'));
