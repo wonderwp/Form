@@ -50,7 +50,7 @@ interface FormInterface
      *
      * @return static
      */
-    public function addField(FieldInterface $field = null, $groupName = '');
+    public function addField(?FieldInterface $field = null, $groupName = '');
 
     /**
      * Remove several fields from the form, given an array of field names to remove

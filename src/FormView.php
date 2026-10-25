@@ -27,7 +27,7 @@ class FormView implements FormViewInterface
      * @param FormValidatorInterface|null $validator
      * @param FormInterface|null $formInstance
      */
-    public function __construct(FormValidatorInterface $validator = null, FormInterface $formInstance = null)
+    public function __construct(?FormValidatorInterface $validator = null, ?FormInterface $formInstance = null)
     {
         $this->validator    = $validator;
         $this->formInstance = $formInstance;
