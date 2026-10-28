@@ -92,7 +92,7 @@ class Form implements FormInterface, JsonSerializable
     }
 
     /** @inheritdoc */
-    public function addField(FieldInterface $field = null, $groupName = '')
+    public function addField(?FieldInterface $field = null, $groupName = '')
     {
         if (is_null($field)) {
             return $this;
