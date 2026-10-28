@@ -1,9 +1,17 @@
 <?php
 
-namespace WonderWp\Component\Form;
+declare(strict_types=1);
+
+
+namespace WonderWp\Component\Form\Tests\Unit;
+
+use WonderWp\Component\Form\Form;
+use WonderWp\Component\Form\FormInterface;
+use WonderWp\Component\Form\FormGroup;
+use WonderWp\Component\Form\FormViewInterface;
+use WonderWp\Component\Form\Field\InputField;
 
 use PHPUnit\Framework\TestCase;
-use WonderWp\Component\Form\Field\InputField;
 
 class FormTest extends TestCase
 {

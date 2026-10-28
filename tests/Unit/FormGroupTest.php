@@ -1,6 +1,11 @@
 <?php
 
-namespace WonderWp\Component\Form;
+declare(strict_types=1);
+
+
+namespace WonderWp\Component\Form\Tests\Unit;
+
+use WonderWp\Component\Form\FormGroup;
 
 use PHPUnit\Framework\TestCase;
 
@@ -11,7 +16,7 @@ class FormGroupTest extends TestCase
      */
     private $formGroup;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->formGroup = new FormGroup('testName', 'testTitle');
     }
