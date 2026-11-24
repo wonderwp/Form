@@ -88,7 +88,7 @@ class FormViewReadOnly extends FormView
         if ($field instanceof OptionsFieldInterface) {
             $opts = $field->getOptions();
 
-            if (array_key_exists($val, $opts) && !empty($opts[$val])) {
+            if ($val !== null && array_key_exists($val, $opts) && !empty($opts[$val])) {
                 $markup .= $opts[$val];
             }
         } else {
